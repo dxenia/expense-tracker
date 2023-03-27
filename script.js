@@ -11,10 +11,10 @@ const account = {
     this.income.push(amountIn);
     return this.income;
   },
-  listAllExpenses: function () {
-    let listExpenses = "";
+  listAllExpenses: function (expenses) {
+    let listExpenses = "List of your expenses:\n";
     for (let i = 0; i < this.expenses.length; i++) {
-      totalExpenses += this.expenses[i];
+      listExpenses += `${this.expenses[i]}, `;
     }
     return listExpenses;
   },
@@ -45,9 +45,11 @@ function menu() {
   4) Get summary`));
   
   if (choice === 1) {
-    const amountOut = parseFloat(prompt("How much did you spend?")); 
-    if (typeof amountOut === "number" && amountOut > 0) {
-      account.addExpenses(amountOut); 
+    const amountOut = parseFloat(prompt("How much did you spend?"));
+    const amountOutItem = parseFloat(prompt("What did you spend money on? (Food, gas, bills, etc.)"))
+    if (amountOut > 0 && amountOut === "number" && amountOutItem === "string") {
+      account.addExpenses(amountOut);
+      account.addExpenses(amountOutItem);
       menu();
     } else {
       alert("Not a valid input.");
@@ -63,7 +65,7 @@ function menu() {
       menu();
     }
   } else if (choice === 3) {
-    alert(`List of total expenses: \n${account.listAllExpenses()}`)
+    account.listAllExpenses()
     menu();
   } else if (choice === 4) {
     account.getSummary()
