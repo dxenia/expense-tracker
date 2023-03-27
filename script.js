@@ -12,13 +12,20 @@ const account = {
     return this.income;
   },
   listAllExpenses: function () {
+    let listExpenses = "";
+    for (let i = 0; i < this.expenses.length; i++) {
+      totalExpenses += this.expenses[i];
+    }
+    return listExpenses;
+  },
+  totExpenses: function () {
     let totalExpenses = 0;
     for (let i = 0; i < this.expenses.length; i++) {
       totalExpenses += this.expenses[i];
     }
     return totalExpenses;
   },
-  listAllIncome: function () {
+  totIncome: function () {
     let totalIncome = 0;
     for (let i = 0; i < this.income.length; i++) {
       totalIncome += this.income[i];
@@ -26,7 +33,7 @@ const account = {
     return totalIncome;
   },
   getSummary: function () {
-    alert(`Your total expenses are: ${this.listAllExpenses()}\nYour total income is: ${this.listAllIncome()}\nYour total balances are: ${this.listAllIncome() - this.listAllExpenses()}`);
+    alert(`Your total expenses are: ${this.totExpenses()}\nYour total income is: ${this.totIncome()}\nYour total balances are: ${this.totIncome() - this.totExpenses()}`);
   }
 }
 
@@ -56,7 +63,7 @@ function menu() {
       menu();
     }
   } else if (choice === 3) {
-    alert(`Your total expenses are ${account.listAllExpenses()}`)
+    alert(`List of total expenses: \n${account.listAllExpenses()}`)
     menu();
   } else if (choice === 4) {
     account.getSummary()
