@@ -4,20 +4,22 @@ const account = {
   expenses: [],
   income: [],
   addExpenses: function (quantity, item) {
-    this.expenses.push(quantity, item);
+    this.expenses.push(`You spent ${quantity} on ${item}`);
     return this.expenses;
   },
   addIncome: function (amountIn) {
     this.income.push(amountIn);
     return this.income;
   },
-  listAllExpenses: function (quantity, item) {
-    alert(`You spent ${quantity} on ${item}`);
+  listAllExpenses: function (element) {
+    this.expenses.forEach((element) => {
+      alert(element);
+    });
     /*let listExpenses = "This is the list of expenses: \n";
-    for (let i = 0; i < arr.length - 1; i++) {
-      listExpenses += `${arr[i]}, \n`;
+    for (let i = 0; i < this.expenses.length - 1; ++i) {
+      listExpenses += `${this.expenses[i]}, \n`;
     }
-    alert(listExpenses);*/
+    return `You spent ${this.expenses[quantity] on ${this.expenses.item}}`*/
   },
   totExpenses: function () {
     let totalExpenses = 0;
@@ -66,7 +68,7 @@ function menu() {
       menu();
     }
   } else if (choice === 3) {
-    account.expenses.forEach(account.listAllExpenses);
+    account.listAllExpenses()
     menu();
   } else if (choice === 4) {
     account.getSummary()
