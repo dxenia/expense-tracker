@@ -3,20 +3,21 @@ const account = {
   name: "Dana",
   expenses: [],
   income: [],
-  addExpenses: function (amountOut) {
-    this.expenses.push(amountOut);
+  addExpenses: function (quantity, item) {
+    this.expenses.push(quantity, item);
     return this.expenses;
   },
   addIncome: function (amountIn) {
     this.income.push(amountIn);
     return this.income;
   },
-  listAllExpenses: function (expenses) {
-    let listExpenses = "List of your expenses:\n";
-    for (let i = 0; i < this.expenses.length; i++) {
-      listExpenses += `${this.expenses[i]}, `;
+  listAllExpenses: function (quantity, item) {
+    alert(`You spent ${quantity} on ${item}`);
+    /*let listExpenses = "This is the list of expenses: \n";
+    for (let i = 0; i < arr.length - 1; i++) {
+      listExpenses += `${arr[i]}, \n`;
     }
-    return listExpenses;
+    alert(listExpenses);*/
   },
   totExpenses: function () {
     let totalExpenses = 0;
@@ -45,11 +46,11 @@ function menu() {
   4) Get summary`));
   
   if (choice === 1) {
-    const amountOut = parseFloat(prompt("How much did you spend?"));
-    const amountOutItem = parseFloat(prompt("What did you spend money on? (Food, gas, bills, etc.)"))
-    if (amountOut > 0 && amountOut === "number" && amountOutItem === "string") {
-      account.addExpenses(amountOut);
-      account.addExpenses(amountOutItem);
+    const quantity = parseFloat(prompt("How much did you spend?"));
+    const item = parseFloat(prompt("What did you spend money on? (Food, gas, bills, etc.)"));
+
+    if (/*typeof quantity === "number" &&*/ quantity > 0 /*&& typeof item === "string"*/) {
+      account.addExpenses(quantity, item);
       menu();
     } else {
       alert("Not a valid input.");
@@ -65,7 +66,7 @@ function menu() {
       menu();
     }
   } else if (choice === 3) {
-    account.listAllExpenses()
+    account.expenses.forEach(account.listAllExpenses);
     menu();
   } else if (choice === 4) {
     account.getSummary()
