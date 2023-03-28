@@ -3,17 +3,17 @@ const account = {
   name: "Dana",
   expenses: [],
   income: [],
-  addExpenses: function (quantity, item) {
-    this.expenses.push(`You spent ${quantity} on ${item}`);
+  addExpenses: function (quantity) {
+    this.expenses.push(quantity);
     return this.expenses;
   },
   addIncome: function (amountIn) {
     this.income.push(amountIn);
     return this.income;
   },
-  listAllExpenses: function (element) {
-    this.expenses.forEach((element) => {
-      alert(element);
+  listAllExpenses: function (quantity, item) {
+    this.expenses.forEach((quantity, item) => {
+      alert(`You spent ${quantity} on ${item}`);
     });
     /*let listExpenses = "This is the list of expenses: \n";
     for (let i = 0; i < this.expenses.length - 1; ++i) {
@@ -52,7 +52,7 @@ function menu() {
     const item = parseFloat(prompt("What did you spend money on? (Food, gas, bills, etc.)"));
 
     if (/*typeof quantity === "number" &&*/ quantity > 0 /*&& typeof item === "string"*/) {
-      account.addExpenses(quantity, item);
+      account.addExpenses(quantity);
       menu();
     } else {
       alert("Not a valid input.");
@@ -68,13 +68,14 @@ function menu() {
       menu();
     }
   } else if (choice === 3) {
-    account.listAllExpenses()
+    account.listAllExpenses(account.expenses.quantity)
     menu();
   } else if (choice === 4) {
     account.getSummary()
     menu();
   } else if (choice > 4 || typeof choice !== "number") {
     alert("Not a valid input.")
+    menu();
   }
 }
 
