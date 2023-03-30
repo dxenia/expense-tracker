@@ -1,80 +1,69 @@
-
 const account = {
   name: "Dana",
   expenses: [],
   income: [],
-  addExpenses: function (quantity) {
-    this.expenses.push(quantity);
-    return this.expenses;
+  addExpenses: function () {
+    const quantity = parseFloat(prompt("How much did you spend?"));
+    if (quantity === "" || isNaN(quantity)) {
+      alert("Not a valid input! Please add a number");
+    } 
+    const item = prompt("What did you spend money on? (Food, gas, bills, etc.)");
+    this.expenses.push({ quantity, item });
+    menu();
   },
-  addIncome: function (amountIn) {
+  addIncome: function () {
+    const amountIn = parseFloat(prompt("How much did you earn?"));
+    if (amountIn === "" || isNaN(amountIn)) {
+      alert("Not a valid input! Please add a number");
+    } 
     this.income.push(amountIn);
-    return this.income;
+    menu();
   },
-  listAllExpenses: function (quantity, item) {
-    this.expenses.forEach((quantity, item) => {
-      alert(`You spent ${quantity} on ${item}`);
+  listAllExpenses: function () {
+    this.expenses.forEach((expense) => {
+      alert(`You spent ${expense.quantity} on ${expense.item}`);
     });
-    /*let listExpenses = "This is the list of expenses: \n";
-    for (let i = 0; i < this.expenses.length - 1; ++i) {
-      listExpenses += `${this.expenses[i]}, \n`;
-    }
-    return `You spent ${this.expenses[quantity] on ${this.expenses.item}}`*/
+    menu();
   },
-  totExpenses: function () {
+  getSummary: function () {
     let totalExpenses = 0;
-    for (let i = 0; i < this.expenses.length; i++) {
-      totalExpenses += this.expenses[i];
-    }
-    return totalExpenses;
-  },
-  totIncome: function () {
     let totalIncome = 0;
+
+    this.expenses.forEach(function (expense) {
+      totalExpenses += expense.quantity;
+    });
+
     for (let i = 0; i < this.income.length; i++) {
       totalIncome += this.income[i];
     }
-    return totalIncome;
+
+    alert(
+      `Your total expenses are: ${totalExpenses}\nYour total income is: ${totalIncome}\nYour total balances are: ${
+        totalIncome - totalExpenses}`
+    );
+    menu();
   },
-  getSummary: function () {
-    alert(`Your total expenses are: ${this.totExpenses()}\nYour total income is: ${this.totIncome()}\nYour total balances are: ${this.totIncome() - this.totExpenses()}`);
-  }
-}
+};
 
 function menu() {
-  const choice = parseFloat(prompt(`Hello ${account.name}! Welcome to your EXPENSE TRACKER.\nPlease pick one of the following options: 
-  1) Add expenses
-  2) Add income
-  3) List all expenses
-  4) Get summary`));
-  
-  if (choice === 1) {
-    const quantity = parseFloat(prompt("How much did you spend?"));
-    const item = parseFloat(prompt("What did you spend money on? (Food, gas, bills, etc.)"));
+  const choice = parseFloat(
+    prompt(`Hello ${account.name}! Welcome to your EXPENSE TRACKER.\nPlease pick one of the following options: 
+    1) Add expenses
+    2) Add income
+    3) List all expenses
+    4) Get summary`)
+  );
 
-    if (/*typeof quantity === "number" &&*/ quantity > 0 /*&& typeof item === "string"*/) {
-      account.addExpenses(quantity);
-      menu();
-    } else {
-      alert("Not a valid input.");
-      menu();
-    }
+  if (choice === 1) {
+    account.addExpenses();
   } else if (choice === 2) {
-    const amountIn = parseFloat(prompt("How much did you earn?")); 
-    if (typeof amountIn === "number" && amountIn > 0) {
-      account.addIncome(amountIn);
-      menu();
-    } else {
-      alert("Not a valid input.");
-      menu();
-    }
+    account.addIncome()
   } else if (choice === 3) {
-    account.listAllExpenses(account.expenses.quantity)
-    menu();
+    account.listAllExpenses(account.expenses.quantity);
   } else if (choice === 4) {
-    account.getSummary()
-    menu();
+    account.getSummary();
   } else if (choice > 4 || typeof choice !== "number") {
-    alert("Not a valid input.")
+    alert("Not a valid input! Please select a number between 1 and 4.");
     menu();
   }
 }
