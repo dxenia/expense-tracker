@@ -45,6 +45,11 @@ const account = {
   },
 };
 
+// In the previous object we used prompt, both in combination with parseFloat and alone by itself. I learned from Helena
+// that when used alone it returns a string, in comparison to it combined to parseFloat which returns a number. The purpose
+// of parseFloat is in fact to take a string and return it into number. Using prompt in both cases has helped me define
+// a more specific input the user has to take when using the application.
+
 function menu() {
   const choice = parseFloat(
     prompt(`Hello ${account.name}! Welcome to your EXPENSE TRACKER.\nPlease pick one of the following options: 
@@ -53,6 +58,9 @@ function menu() {
     3) List all expenses
     4) Get summary`)
   );
+
+  // I decided to use the if/else statements because I feel more comfortable using them instead of switch! No particular reason other
+  // than personal preference and comfort :)
 
   if (choice === 1) {
     account.addExpenses();
